@@ -8,73 +8,122 @@ To write a program to implement the the Logistic Regression Model to Predict the
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. Import the standard libraries.
-2. Upload the dataset and check for any null or duplicated values using .isnull() and .duplicated() function respectively.
-3. Import LabelEncoder and encode the dataset.
-4. Import LogisticRegression from sklearn and apply the model on the dataset.
-5. Predict the values of array.
-6. Calculate the accuracy, confusion and classification report by importing the required modules from sklearn.
-7. Apply new unknown values.
+1. Import dataset
+2. Check for null and duplicate values
+3. Assign x and y values
+4. Split the data into training and testing data
+5. Import logistic regression and fit the training data
+6. Predict y value
+7. Calculate accuracy and confusion matrix
 
 ## Program:
 ```
 /*
 Program to implement the the Logistic Regression Model to Predict the Placement Status of Student.
-Developed by: Vigneshkumar V
-RegisterNumber: 212220220054
-*/
-```
-import pandas as pd data = pd.read_csv("Placement_Data.csv") data.head()
+Developed by: Manjupriya P
+RegisterNumber:212220220024
 
-data1 = data.copy() data1 = data1.drop(["sl_no","salary"],axis = 1) data1.head()
+import pandas as pd
+
+data=pd.read_csv('/content/Placement_Data.csv')
+
+data.head()
+
+data1=data.copy()
+
+data1=data1.drop(["sl_no","salary"],axis=1)
+
+data1.head()
 
 data1.isnull().sum()
 
 data1.duplicated().sum()
 
-from sklearn.preprocessing import LabelEncoder le = LabelEncoder() data1["gender"] = le.fit_transform(data1["gender"]) data1["ssc_b"] = le.fit_transform(data1["ssc_b"]) data1["hsc_b"] = le.fit_transform(data1["hsc_b"]) data1["hsc_s"] = le.fit_transform(data1["hsc_s"]) data1["degree_t"] = le.fit_transform(data1["degree_t"]) data1["workex"] = le.fit_transform(data1["workex"]) data1["specialisation"] = le.fit_transform(data1["specialisation"]) data1["status"] = le.fit_transform(data1["status"]) data1
+from sklearn.preprocessing import LabelEncoder
 
-x = data1.iloc[:,:-1] x
+le=LabelEncoder()
 
-y = data1["status"] y
+data1["gender"]=le.fit_transform(data1["gender"])
 
-from sklearn.model_selection import train_test_split x_train,x_test,y_train,y_test = train_test_split(x,y,test_size = 0.2,random_state = 0)
+data1["ssc_b"]=le.fit_transform(data1["ssc_b"])
 
-from sklearn.linear_model import LogisticRegression lr = LogisticRegression(solver = "liblinear") lr.fit(x_train,y_train)
+data1["hsc_b"]=le.fit_transform(data1["hsc_b"])
 
-y_pred = lr.predict(x_test) y_pred
+data1["hsc_s"]=le.fit_transform(data1["hsc_s"])
 
-from sklearn.metrics import accuracy_score accuracy = accuracy_score(y_test,y_pred) accuracy
+data1["degree_t"]=le.fit_transform(data1["degree_t"])
 
-from sklearn.metrics import confusion_matrix confusion = confusion_matrix(y_test,y_pred) confusion
+data1["workex"]=le.fit_transform(data1["workex"])
 
-from sklearn.metrics import classification_report classification_report1 = classification_report(y_test,y_pred) classification_report1
+data1["specialisation"]=le.fit_transform(data1["specialisation"])
+
+data1["status"]=le.fit_transform(data1["status"])
+
+data1
+
+x=data1.iloc[:,:-1]
+
+x
+
+y=data1["status"]
+
+y
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=0)
+
+from sklearn.linear_model import LogisticRegression
+
+lr=LogisticRegression(solver="liblinear")
+
+lr.fit(x_train,y_train)
+
+y_pred=lr.predict(x_test)
+
+y_pred
+
+from sklearn.metrics import accuracy_score
+
+accuracy=accuracy_score(y_test,y_pred)
+
+from sklearn.metrics import confusion_matrix
+
+confusion=(y_test,y_pred)
+
+confusion
+
+from sklearn.metrics import classification_report
+
+cr=classification_report(y_test,y_pred)
+
+print(cr)
 
 lr.predict([[1,80,1,90,1,1,90,1,0,85,1,85]])
-
+*/
+```
 ## Output:
-1.Placement data
-![Screenshot (24)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/cc993bfc-84e6-4694-bf22-5f112667019b)
-2.Salary data
-![Screenshot (25)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/65fc7a72-4539-49b2-8a82-0d2411f70a8d)
-3.Checking the null() function
-![Screenshot (26)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/9ffe5af5-7c45-4731-9216-e5d092a5c16b)
-4.Data Duplicate
-![Screenshot (27)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/423ef5ec-25da-41b8-a2ba-1224161d58ff)
-5.Print data
-![Screenshot (28)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/ba355492-a73f-4113-8c3d-b01f70fa7240)
-6.Data-status
-![Screenshot (29)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/12055b47-dad4-48a9-882d-da6da289d306)
-7.y_prediction array
-![Screenshot (30)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/6b9445b3-7e28-4221-8cd3-0ed253e791e6)
-8.Accuracy value
-![Screenshot (31)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/0a91a931-a142-4947-8304-2cc72235317f)
-9.Confusion array
-![Screenshot (32)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/76581362-d1f9-4929-9e87-ba5d37f9f741)
-10.Classification report
-![Screenshot (34)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/a7ca70b2-028f-472c-82bb-74d8a6d0b43f)
-11..Prediction of LR
-![Screenshot (35)](https://github.com/VigneshKumar1009/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/113573894/d601d533-0da4-4bf6-8278-25e6ffe0c247)
+
+## PLACEMENT DATA:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/4a8f4795-6f8a-4001-bf67-241dc802fb5c)
+## SALARY DATA:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/d5ee33ad-1b02-4482-b4a6-e0be58e25e72)
+## CHECKING NULL VALUE:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/762f5d3f-1d86-4df8-b5a7-597c066e956f)
+## DATA DUPLICATE:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/544ede4f-ecc0-49d7-915c-24a407930373)
+## PRINT DATA:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/39724df8-e293-4047-a1dc-a31467d0cd8b)
+## Y_PREDICTED ARRAY:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/68015e7e-f105-4f28-9499-1fe9995c027a)
+## CONFUSION ARRAY:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/bfb8c5b2-87e7-4def-b1cd-d2ced2172d3d)
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/25b2ba47-83dc-4c65-bd6c-5c9a8879a6e6)
+## CLASSIFICATION REPORT:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/2aa1f569-3280-469e-ab99-e30a582ad14a)
+## PREDICTION OF LR:
+![image](https://github.com/srimathi-25/Implementation-of-Logistic-Regression-Model-to-Predict-the-Placement-Status-of-Student/assets/114581999/a5bde930-23e5-44e7-98e0-511b0440921e)
+
 
 
 ## Result:
